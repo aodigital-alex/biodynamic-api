@@ -2,10 +2,11 @@
 
 from datetime import datetime
 
-# Fagan-Bradley ayanamsa base (degrees as of 1900-01-01)
-_AYANAMSA_BASE_DEG = 23.0 + 51.0 / 60.0 + 11.0 / 3600.0
-_AYANAMSA_RATE_SEC_PER_YEAR = 50.3  # arc-seconds per Julian year
-_J1900 = 2415020.0  # Julian date of 1900-01-01
+# Fagan-Bradley ayanamsa anchored to J2000.0: 24°2'22" (standard value)
+# Source: Astronomical Almanac / Fagan-Bradley standard
+_FAGAN_BRADLEY_J2000 = 24.0 + 2.0 / 60.0 + 22.0 / 3600.0  # = 24.0394°
+_AYANAMSA_RATE_SEC_PER_YEAR = 50.258  # arc-seconds per Julian year (IAU precession)
+_J2000 = 2451545.0  # Julian date of J2000.0
 
 # Constellation order (0°–360° sidereal longitude)
 CONSTELLATIONS = [
@@ -55,8 +56,8 @@ DAY_TYPE_EMOJI = {
 
 def ayanamsa(jd: float) -> float:
     """Return Fagan-Bradley ayanamsa in degrees for the given Julian date."""
-    years_since_1900 = (jd - _J1900) / 365.25
-    return _AYANAMSA_BASE_DEG + (_AYANAMSA_RATE_SEC_PER_YEAR * years_since_1900) / 3600.0
+    years_since_2000 = (jd - _J2000) / 365.25
+    return _FAGAN_BRADLEY_J2000 + (_AYANAMSA_RATE_SEC_PER_YEAR * years_since_2000) / 3600.0
 
 
 def tropical_to_sidereal(tropical_lon: float, jd: float) -> float:

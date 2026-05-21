@@ -10,10 +10,10 @@ from biodynamic.core.zodiac import (
 
 
 def test_ayanamsa_2000():
-    # J2000 = JD 2451545.0; Fagan-Bradley ayanamsa ≈ 25.25°
+    # J2000 = JD 2451545.0; Fagan-Bradley standard value: 24°2'22" = 24.0394°
     jd_2000 = 2451545.0
     result = ayanamsa(jd_2000)
-    assert 25.0 < result < 25.5
+    assert 24.0 < result < 24.1
 
 
 def test_ayanamsa_increases_over_time():

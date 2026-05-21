@@ -1,16 +1,18 @@
 [
   {
-    "date": "2026-05-21",
-    "expected_constellation": "aries",
+    "date": "2026-05-24",
+    "expected_constellation": "sagittarius",
     "expected_day_type": "fruit",
     "expected_element": "fire",
-    "source": "astro-seek.com"
+    "source": "user-verified vs reference calendar",
+    "note": "Sunday, Moon at 240.55° sidereal — verified against external biodynamic calendar"
   },
   {
-    "date": "2026-06-01",
-    "expected_constellation": "scorpio",
-    "expected_day_type": "leaf",
-    "expected_element": "water",
-    "source": "to-be-verified"
+    "date": "2026-05-25",
+    "expected_constellation": "sagittarius",
+    "expected_day_type": "fruit",
+    "expected_element": "fire",
+    "source": "calculated post-ayanamsa-fix",
+    "note": "Moon at 255.70° sidereal (Sagittarius)"
   }
 ]
