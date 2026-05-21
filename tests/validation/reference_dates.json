@@ -1,0 +1,16 @@
+[
+  {
+    "date": "2026-05-21",
+    "expected_constellation": "aries",
+    "expected_day_type": "fruit",
+    "expected_element": "fire",
+    "source": "astro-seek.com"
+  },
+  {
+    "date": "2026-06-01",
+    "expected_constellation": "scorpio",
+    "expected_day_type": "leaf",
+    "expected_element": "water",
+    "source": "to-be-verified"
+  }
+]
