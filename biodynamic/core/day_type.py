@@ -139,15 +139,18 @@ def _collect_warnings(day_start: datetime, day_end: datetime) -> list[Warning]:
 def build_day(target_date: date, tz_name: str = "UTC") -> BiodynamicDay:
     tz = ZoneInfo(tz_name)
 
-    day_start = datetime(target_date.year, target_date.month, target_date.day, 0, 0, 0, tzinfo=tz)
-    day_end = datetime(target_date.year, target_date.month, target_date.day, 23, 59, 59, tzinfo=tz)
+    # Dominant constellation is determined over the UTC calendar day (00:00–24:00 UTC).
+    # This matches the convention used by astro-seek and Maria Thun calendar publications,
+    # where the "day type" is independent of the observer's local timezone offset.
+    utc_day_start = datetime(target_date.year, target_date.month, target_date.day, 0, 0, 0, tzinfo=timezone.utc)
+    utc_day_end = datetime(target_date.year, target_date.month, target_date.day, 23, 59, 59, tzinfo=timezone.utc)
 
-    # Convert to UTC for astronomy calculations
-    day_start_utc = day_start.astimezone(timezone.utc)
-    day_end_utc = day_end.astimezone(timezone.utc)
-    noon_utc = day_start_utc + timedelta(hours=12)
+    # Warnings and moon state still use local noon for user-relevant context
+    day_start_utc = datetime(target_date.year, target_date.month, target_date.day, 0, 0, 0, tzinfo=tz).astimezone(timezone.utc)
+    day_end_utc = datetime(target_date.year, target_date.month, target_date.day, 23, 59, 59, tzinfo=tz).astimezone(timezone.utc)
+    noon_utc = utc_day_start + timedelta(hours=12)
 
-    constellation, entry, exit_dt = _dominant_constellation(day_start_utc, day_end_utc)
+    constellation, entry, exit_dt = _dominant_constellation(utc_day_start, utc_day_end)
     element = ELEMENT[constellation]
     day_type = day_type_for_constellation(constellation)
     emoji = DAY_TYPE_EMOJI[day_type]
